@@ -1,6 +1,6 @@
-'use strict;'
+'use strict';
 
-MESSAGES = [
+var MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -9,7 +9,7 @@ MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
-NAMES = [
+var NAMES = [
   'Артём',
   'Вася',
   'Пётр',
@@ -19,8 +19,8 @@ NAMES = [
   'Сара'
 ];
 
-AVATARS_AMOUNT = 6;
-PICTURES_AMOUNT = 25;
+var AVATARS_AMOUNT = 6;
+var PICTURES_AMOUNT = 25;
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -39,25 +39,39 @@ var getRandomElement = function (array) {
 };
 
 var getPictures = function (amount, likesMinimum, likesMaximum) {
-  var pictures = []
+  var pictures = [];
+
+  var getComments = function (number) {
+    var comments = [];
+
+    for (var i = 0; i < number; ++i) {
+      var avatar = 'img/avatar-' + getRandomInt(1, AVATARS_AMOUNT + 1) + '.svg';
+      var message = getRandomElement(MESSAGES);
+      var name = getRandomElement(NAMES);
+
+      var comment = {
+        avatar: avatar,
+        message: message,
+        name: name
+      };
+
+      comments.push(comment);
+    }
+    return comments;
+  };
 
   for (var i = 1; i < amount + 1; ++i) {
     var url = 'photos/' + i + '.jpg';
     var description = 'Какое-то описание, в ТЗ нет указаний на этот счёт';
     var likes = getRandomInt(likesMinimum, likesMaximum + 1);
-    var avatar = 'img/avatar-' + getRandomInt(1, AVATARS_AMOUNT + 1) + '.svg';
-    var message = getRandomElement(MESSAGES);
-    var name = getRandomElement(NAMES);
+
+    var comments = getComments(getRandomInt(0, likes / 3));
 
     var picture = {
       url: url,
       description: description,
       likes: likes,
-      comments: {
-        avatar: avatar,
-        message: message,
-        name: name
-      }
+      comments: comments
     };
     pictures.push(picture);
   }
@@ -74,7 +88,7 @@ var placePictures = function (amount) {
 
     pictureElement.querySelector('.picture__img').src = picture.url;
     pictureElement.querySelector('.picture__likes').textContent = picture.likes;
-    pictureElement.querySelector('.picture__comments').textContent = (picture.comments).toString();
+    pictureElement.querySelector('.picture__comments').textContent = picture.comments.length;
 
     return pictureElement;
   };
@@ -90,5 +104,5 @@ var placePictures = function (amount) {
   picturesContainer.appendChild(fragment);
 };
 
-placePictures(25);
+placePictures(PICTURES_AMOUNT);
 
