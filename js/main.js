@@ -38,7 +38,7 @@ var getRandomElement = function (array) {
   return array[getRandomInt(0, len)];
 };
 
-var getPictures = function (amount, likesMinimum, likesMaximum) {
+var getPictures = function (amount) {
   var pictures = [];
 
   var getComments = function (number) {
@@ -63,7 +63,7 @@ var getPictures = function (amount, likesMinimum, likesMaximum) {
   for (var i = 1; i < amount + 1; ++i) {
     var url = 'photos/' + i + '.jpg';
     var description = 'Какое-то описание, в ТЗ нет указаний на этот счёт';
-    var likes = getRandomInt(likesMinimum, likesMaximum + 1);
+    var likes = getRandomInt(15, 200 + 1);
 
     var comments = getComments(getRandomInt(0, likes / 3));
 
