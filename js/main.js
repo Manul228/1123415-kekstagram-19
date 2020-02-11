@@ -111,20 +111,16 @@ var placePictures = function (amount) {
   var createComments = function (picture) {
     var htmlComments = [];
 
-    for (var i = 0; i < picture.comments.length; ++i) {
+    for (var j = 0; j < picture.comments.length; ++j) {
 
-      var avatar = picture.comments[i].avatar;
-      var name = picture.comments[i].name;
-      var message = picture.comments[i].message;
+      var avatar = picture.comments[j].avatar;
+      var name = picture.comments[j].name;
+      var message = picture.comments[j].message;
 
       var roundElement = document.createElement('li');
       roundElement.classList.add('social__comment');
-      roundElement.innerHTML = `<img
-      class="social__picture"
-      src="${avatar}"
-      alt="${name}"
-      width="35" height="35">
-      <p class="social__text">${message}</p>`;
+      roundElement.innerHTML = '<img class="social__picture" src="' + avatar + '" alt="' + name +
+      '" width="35" height="35"><p class="social__text">' + message + '</p>';
 
       htmlComments.push(roundElement);
     }
@@ -141,11 +137,13 @@ var placePictures = function (amount) {
 
   var socialComments = bigPicture.querySelector('.social__comments');
 
-  var fragment = document.createDocumentFragment();
-  for (var i = 0; i < bigComments.length; ++i) {
-    fragment.appendChild(bigComments[i]);
+  var bigCommentsFragment = document.createDocumentFragment();
+
+  for (var k = 0; k < bigComments.length; ++k) {
+    bigCommentsFragment.appendChild(bigComments[k]);
   }
-  socialComments.appendChild(fragment);
+
+  socialComments.appendChild(bigCommentsFragment);
 
   bigPicture.querySelector('.social__comment-count').classList.add('hidden');
   bigPicture.querySelector('.comments-loader').classList.add('hidden');
