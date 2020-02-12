@@ -93,7 +93,7 @@ var placePictures = function (amount) {
     return pictureElement;
   };
 
-  var pictures = getPictures(amount, 15, 200);
+  var pictures = getPictures(amount);
 
   var fragment = document.createDocumentFragment();
 
