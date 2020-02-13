@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Егор](https://up.htmlacademy.ru/javascript/19/user/1123415).
-* Наставник: `Неизвестно`.
+* Наставник: [Павел Фанасков](https://htmlacademy.ru/profile/id615993).
 
 ---
 
