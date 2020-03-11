@@ -103,53 +103,82 @@ var placePictures = function (amount) {
 
   picturesContainer.appendChild(fragment);
 
-  var bigPicture = document.querySelector('.big-picture');
-  bigPicture.classList.remove('hidden');
-
   var firstPicture = pictures[0];
 
-  var createComments = function (picture) {
-    var htmlComments = [];
+  var showBigPicture = function (picture) {
+    var bigPicture = document.querySelector('.big-picture');
+    bigPicture.classList.remove('hidden');
 
-    for (var j = 0; j < picture.comments.length; ++j) {
+    var createComments = function (pictureToComment) {
+      var htmlComments = [];
 
-      var avatar = picture.comments[j].avatar;
-      var name = picture.comments[j].name;
-      var message = picture.comments[j].message;
+      for (var j = 0; j < pictureToComment.comments.length; ++j) {
 
-      var roundElement = document.createElement('li');
-      roundElement.classList.add('social__comment');
-      roundElement.innerHTML = '<img class="social__picture" src="' + avatar + '" alt="' + name +
-      '" width="35" height="35"><p class="social__text">' + message + '</p>';
+        var avatar = pictureToComment.comments[j].avatar;
+        var name = pictureToComment.comments[j].name;
+        var message = pictureToComment.comments[j].message;
 
-      htmlComments.push(roundElement);
+        var roundElement = document.createElement('li');
+        roundElement.classList.add('social__comment');
+        roundElement.innerHTML = '<img class="social__picture" src="' + avatar + '" alt="' + name +
+          '" width="35" height="35"><p class="social__text">' + message + '</p>';
+
+        htmlComments.push(roundElement);
+      }
+
+      return htmlComments;
+    };
+
+    var bigComments = createComments(picture);
+
+    bigPicture.querySelector('.big-picture__img').src = picture.url;
+    bigPicture.querySelector('.likes-count').textContent = picture.likes;
+    bigPicture.querySelector('.comments-count').textContent = picture.comments.length;
+    bigPicture.querySelector('.social__caption').textContent = picture.description;
+
+    var socialComments = bigPicture.querySelector('.social__comments');
+
+    var bigCommentsFragment = document.createDocumentFragment();
+
+    for (var k = 0; k < bigComments.length; ++k) {
+      bigCommentsFragment.appendChild(bigComments[k]);
     }
 
-    return htmlComments;
+    socialComments.appendChild(bigCommentsFragment);
+
+    bigPicture.querySelector('.social__comment-count').classList.add('hidden');
+    bigPicture.querySelector('.comments-loader').classList.add('hidden');
+
+    document.body.classList.add('modal-open');
   };
 
-  var bigComments = createComments(firstPicture);
+  showBigPicture(firstPicture);
 
-  bigPicture.querySelector('.big-picture__img').src = firstPicture.url;
-  bigPicture.querySelector('.likes-count').textContent = firstPicture.likes;
-  bigPicture.querySelector('.comments-count').textContent = firstPicture.comments.length;
-  bigPicture.querySelector('.social__caption').textContent = firstPicture.description;
-
-  var socialComments = bigPicture.querySelector('.social__comments');
-
-  var bigCommentsFragment = document.createDocumentFragment();
-
-  for (var k = 0; k < bigComments.length; ++k) {
-    bigCommentsFragment.appendChild(bigComments[k]);
-  }
-
-  socialComments.appendChild(bigCommentsFragment);
-
-  bigPicture.querySelector('.social__comment-count').classList.add('hidden');
-  bigPicture.querySelector('.comments-loader').classList.add('hidden');
-
-  document.body.classList.add('modal-open');
 };
 
 placePictures(PICTURES_AMOUNT);
+
+var ESC_KEYCODE = 27;
+
+var uploadFile = pictureBlock.querySelector('#upload-file');
+var uploadFileForm = pictureBlock.querySelector('.img-upload__overlay');
+var editCloseButton = uploadFileForm.querySelector('#upload-cancel');
+var imagePreview = uploadFileForm.querySelector('.img-upload__preview img');
+
+var smallerScaleButton = uploadFileForm.querySelector('.scale__control--smaller');
+var biggerScaleButton = uploadFileForm.querySelector('.scale__control--bigger');
+var scaleField = uploadFileForm.querySelector('.scale__control--value');
+
+var effectButtons = uploadFileForm.querySelectorAll('.effects__radio');
+var effectLevel = uploadFileForm.querySelector('.effect-level');
+var effectInput = effectLevel.querySelector('.effect-level__value');
+var effectlevelBar = effectLevel.querySelector('.effect-level__line');
+var effectLevelButton = effectLevel.querySelector('.effect-level__pin');
+var currentEffect;
+
+var hashtagInput = uploadFileForm.querySelector('.text__hashtags');
+
+
+
+
 
