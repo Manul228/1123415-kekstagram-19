@@ -22,6 +22,7 @@
   ];
 
   var AVATARS_AMOUNT = 6;
+  var PICTURES_AMOUNT = 25;
 
   var getComments = function (number) {
     var comments = [];
@@ -64,7 +65,7 @@
   };
 
   window.data = {
-    getPictures: getPictures
+    pictures: pictures = getPictures(PICTURES_AMOUNT)
   };
 
 })();
