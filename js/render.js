@@ -2,8 +2,6 @@
 
 (function () {
 
-  var PICTURES_AMOUNT = 25;
-
   var pictureContainer = document.querySelector('.pictures');
   var pictureTemplate = document.querySelector('#picture')
     .content

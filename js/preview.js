@@ -9,8 +9,6 @@
   var commentsList = document.querySelector('.social__comments');
   var commentElement = commentsList.querySelector('.social__comment');
 
-  console.log(window.data.pictures);
-
   var showBigPicture = function (picture) {
     bigPictureElement.classList.remove('hidden');
 
