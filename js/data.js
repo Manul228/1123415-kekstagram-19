@@ -28,9 +28,9 @@
     var comments = [];
 
     for (var i = 0; i < number; ++i) {
-      var avatar = 'img/avatar-' + getRandomInt(1, AVATARS_AMOUNT + 1) + '.svg';
-      var message = getRandomElement(MESSAGES);
-      var name = getRandomElement(NAMES);
+      var avatar = 'img/avatar-' + window.utils.getRandomInt(1, AVATARS_AMOUNT + 1) + '.svg';
+      var message = window.utils.getRandomElement(MESSAGES);
+      var name = window.utils.getRandomElement(NAMES);
 
       var comment = {
         avatar: avatar,
@@ -49,9 +49,9 @@
     for (var i = 1; i < amount + 1; ++i) {
       var url = 'photos/' + i + '.jpg';
       var description = 'Какое-то описание, в ТЗ нет указаний на этот счёт';
-      var likes = getRandomInt(15, 200 + 1);
+      var likes = window.utils.getRandomInt(15, 200 + 1);
 
-      var comments = getComments(getRandomInt(0, likes / 3));
+      var comments = getComments(window.utils.getRandomInt(0, likes / 3));
 
       var picture = {
         url: url,
@@ -64,8 +64,10 @@
     return pictures;
   };
 
+  var pictures = getPictures(PICTURES_AMOUNT);
+
   window.data = {
-    pictures: pictures = getPictures(PICTURES_AMOUNT)
+    pictures: pictures
   };
 
 })();

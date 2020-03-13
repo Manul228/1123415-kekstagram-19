@@ -8,12 +8,11 @@
   var uploadFileForm = window.render.pictureContainer.querySelector('.img-upload__overlay');
 
   var editCloseButton = uploadFileForm.querySelector('#upload-cancel');
-  var imagePreview = uploadFileForm.querySelector('.img-upload__preview img');
   var hashtagInput = uploadFileForm.querySelector('.text__hashtags');
   var commentTextArea = uploadFileForm.querySelector('.text__description');
 
   var onEscCloseForm = function (evt) {
-    if (evt.keyCode === ESC_KEYCODE) {
+    if (evt.keyCode === window.utils.ESC_KEYCODE) {
       uploadFileForm.classList.add('hidden');
     }
     uploadFile.value = '';
