@@ -9,6 +9,8 @@
   var commentsList = document.querySelector('.social__comments');
   var commentElement = commentsList.querySelector('.social__comment');
 
+  console.log(window.data.pictures);
+
   var showBigPicture = function (picture) {
     bigPictureElement.classList.remove('hidden');
 
@@ -19,12 +21,15 @@
 
     var fragment = document.createDocumentFragment();
 
-    for (var i = 0; i < VISIBLE_COMMENTS; ++i) {
+    var lastCommentIndex = picture.comments.length - 1;
+    var actualEndIndex = Math.min(lastCommentIndex, VISIBLE_COMMENTS);
+
+    for (var i = 0; i < actualEndIndex; ++i) {
       var comment = commentElement.cloneNode(true);
 
-      comment.querySelector('.social__picture').src = picture[i].comments.avatar;
-      comment.querySelector('.social__picture').alt = picture[i].comments.name;
-      comment.querySelector('.social__text').textContent = picture[i].comments.message;
+      comment.querySelector('.social__picture').src = picture.comments[i].avatar;
+      comment.querySelector('.social__picture').alt = picture.comments[i].name;
+      comment.querySelector('.social__text').textContent = picture.comments[i].message;
 
       fragment.appendChild(comment);
     }
