@@ -21,15 +21,15 @@
   var effectlevelBar = effectLevel.querySelector('.effect-level__line');
   var effectLevelButton = effectLevel.querySelector('.effect-level__pin');
 
-  var setImageScale = function (positiveFlag) {
+  var setImageScale = function (isPositive) {
     var currentScale = Number.parseInt(scaleField.value, 10);
 
-    if (positiveFlag && (currentScale + SCALE_STEP) <= MAX_SCALE) {
+    if (isPositive && (currentScale + SCALE_STEP) <= MAX_SCALE) {
       scaleField.value = (currentScale + SCALE_STEP) + '%';
       imagePreview.style.transform = 'scale(' + (currentScale + SCALE_STEP) / 100 + ')';
     }
 
-    if (!positiveFlag && (currentScale - SCALE_STEP) >= MIN_SCALE) {
+    if (!isPositive && (currentScale - SCALE_STEP) >= MIN_SCALE) {
       scaleField.value = (currentScale - SCALE_STEP) + '%';
       imagePreview.style.transform = 'scale(' + (currentScale - SCALE_STEP) / 100 + ')';
     }
