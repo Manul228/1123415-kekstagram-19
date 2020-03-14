@@ -92,16 +92,14 @@
   };
 
   reduceButton.addEventListener('click', function () {
-    var positiveFlag = false;
-    setImageScale(positiveFlag);
+    setImageScale(false);
   });
 
   enlargeButton.addEventListener('click', function () {
-    var positiveFlag = true;
-    setImageScale(positiveFlag);
+    setImageScale(true);
   });
 
-  for (var i = 0; i < effectButtons.length; i++) {
+  for (var i = 0; i < effectButtons.length; ++i) {
     effectButtons[i].addEventListener('change', onChangeSelectFilter);
   }
 
