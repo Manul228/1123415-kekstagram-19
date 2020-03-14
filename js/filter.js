@@ -62,9 +62,7 @@
   };
 
   var countEffectLevel = function () {
-    var bar = effectLevelBar.getBoundingClientRect();
     var pin = effectLevelButton.getBoundingClientRect();
-    var barLength = bar.right - bar.left;
     var pinOffset = pin.left - bar.left;
 
     return Math.round((pinOffset / barLength + 0.02) * 100);
