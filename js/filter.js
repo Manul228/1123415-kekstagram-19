@@ -39,7 +39,7 @@
     imagePreview.style.filter = '';
     var currentEffect;
 
-    for (i = 0; i < effectButtons.length; i++) {
+    for (i = 0; i < effectButtons.length; ++i) {
       if (effectButtons[i].checked) {
         imagePreview.classList.remove('effects__preview--' + currentEffect);
         currentEffect = effectButtons[i].value;
@@ -106,4 +106,5 @@
   effectLevelButton.addEventListener('mouseup', function () {
     setEffectLevel();
   });
+
 })();
