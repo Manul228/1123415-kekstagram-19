@@ -18,8 +18,12 @@
   var effectButtons = window.form.uploadFileForm.querySelectorAll('.effects__radio');
   var effectLevel = window.form.uploadFileForm.querySelector('.effect-level');
   var effectInput = effectLevel.querySelector('.effect-level__value');
-  var effectlevelBar = effectLevel.querySelector('.effect-level__line');
+  var effectLevelBar = effectLevel.querySelector('.effect-level__line');
   var effectLevelButton = effectLevel.querySelector('.effect-level__pin');
+  var effectlevelFillBar = window.form.effectLevel.querySelector('.effect-level__depth');
+
+  var bar;
+  var barLength;
 
   var setImageScale = function (isPositive) {
     var currentScale = Number.parseInt(scaleField.value, 10);
@@ -44,17 +48,21 @@
         imagePreview.classList.remove('effects__preview--' + currentEffect);
         currentEffect = effectButtons[i].value;
         if (currentEffect !== 'none') {
-          effectLevel.classList.remove('hidden');
+          window.form.effectLevel.classList.remove('hidden');
+          bar = effectLevelBar.getBoundingClientRect();
+          barLength = bar.right - bar.left;
           imagePreview.classList.add('effects__preview--' + currentEffect);
+          effectLevelButton.style.left = barLength + 'px';
+          effectiveLevelFillBar.style.width = '100%';
         } else {
-          effectLevel.classList.add('hidden');
+          window.form.effectLevel.classList.add('hidden');
         }
       }
     }
   };
 
   var countEffectLevel = function () {
-    var bar = effectlevelBar.getBoundingClientRect();
+    var bar = effectLevelBar.getBoundingClientRect();
     var pin = effectLevelButton.getBoundingClientRect();
     var barLength = bar.right - bar.left;
     var pinOffset = pin.left - bar.left;
