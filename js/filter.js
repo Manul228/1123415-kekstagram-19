@@ -98,7 +98,10 @@
   };
 
   var onEffectPinMousedown = function (evt) {
-    bar = effectLevelBar.
+    evt.preventDefault();
+
+    document.addEventListener('mousemove', );
+    document.addEventListener('mouseup', );
   }
 
   reduceButton.addEventListener('click', function () {
