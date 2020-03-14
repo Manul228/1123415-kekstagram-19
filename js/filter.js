@@ -52,8 +52,8 @@
           imagePreview.classList.add('effects__preview--' + currentEffect);
           bar = effectLevelBar.getBoundingClientRect();
           barLength = bar.right - bar.left;
-          effectLevelButton.style.left = '20%';
-          effectLevelFillBar.style.width = '20%';
+          effectLevelButton.style.left = barLength + 'px';
+          effectlevelFillBar.style.width = '100%';
         } else {
           effectLevel.classList.add('hidden');
         }
