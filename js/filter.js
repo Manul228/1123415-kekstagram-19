@@ -20,7 +20,7 @@
   var effectInput = effectLevel.querySelector('.effect-level__value');
   var effectLevelBar = effectLevel.querySelector('.effect-level__line');
   var effectLevelButton = effectLevel.querySelector('.effect-level__pin');
-  var effectlevelFillBar = window.form.effectLevel.querySelector('.effect-level__depth');
+  var effectLevelFillBar = window.form.effectLevel.querySelector('.effect-level__depth');
 
   var bar;
   var barLength;
@@ -53,7 +53,7 @@
           barLength = bar.right - bar.left;
           imagePreview.classList.add('effects__preview--' + currentEffect);
           effectLevelButton.style.left = barLength + 'px';
-          effectiveLevelFillBar.style.width = '100%';
+          effectLevelFillBar.style.width = '100%';
         } else {
           window.form.effectLevel.classList.add('hidden');
         }
@@ -96,6 +96,10 @@
         break;
     }
   };
+
+  var onEffectPinMousedown = function (evt) {
+    bar = effectLevelBar.
+  }
 
   reduceButton.addEventListener('click', function () {
     setImageScale(false);
