@@ -53,7 +53,7 @@
           bar = effectLevelBar.getBoundingClientRect();
           barLength = bar.right - bar.left;
           effectLevelButton.style.left = barLength + 'px';
-          effectlevelFillBar.style.width = '100%';
+          effectLevelFillBar.style.width = '100%';
         } else {
           effectLevel.classList.add('hidden');
         }
