@@ -8,6 +8,7 @@
     .querySelector('.picture');
 
   var renderPicture = function (pictures) {
+    window.render.pictures = pictures;
     var fragment = document.createDocumentFragment();
 
     for (var i = 0; i < pictures.length; ++i) {
