@@ -44,6 +44,10 @@
     var currentEffect;
 
     for (i = 0; i < effectButtons.length; ++i) {
+      imagePreview.classList.remove('effects__preview--' + effectButtons[i].value);
+    }
+
+    for (i = 0; i < effectButtons.length; ++i) {
       if (effectButtons[i].checked) {
         imagePreview.classList.remove('effects__preview--' + currentEffect);
         currentEffect = effectButtons[i].value;
