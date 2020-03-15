@@ -6,6 +6,9 @@
   var pictureTemplate = document.querySelector('#picture')
     .content
     .querySelector('.picture');
+  var errorTemplate = document.querySelector('#error')
+  .content
+  .querySelector('.error');
 
   var renderPicture = function (pictures) {
     window.render.pictures = pictures;
