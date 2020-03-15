@@ -59,6 +59,7 @@
   var onSmallPictureClick = function (i) {
     return function (evt) {
       evt.preventDefault();
+      console.log(window.render.pictures);
       showBigPicture(window.render.pictures[i]);
 
       bigCloseButton.addEventListener('click', closeBigPicture);
