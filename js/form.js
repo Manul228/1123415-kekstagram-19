@@ -5,30 +5,36 @@
   var MAX_HASHTAG_LENGTH = 20;
 
   var uploadFile = window.render.pictureContainer.querySelector('#upload-file');
-  var uploadFileForm = window.render.pictureContainer.querySelector('.img-upload__overlay');
+  var uploadPictureForm = window.render.pictureContainer.querySelector('.img-upload__overlay');
 
-  var editCloseButton = uploadFileForm.querySelector('#upload-cancel');
-  var hashtagInput = uploadFileForm.querySelector('.text__hashtags');
-  var commentTextArea = uploadFileForm.querySelector('.text__description');
+  var editCloseButton = uploadPictureForm.querySelector('#upload-cancel');
+  var hashtagInput = uploadPictureForm.querySelector('.text__hashtags');
+  var description = uploadPictureForm.querySelector('.text__description');
 
-  var effectLevel = uploadFileForm.querySelector('.effect-level');
+  var effectLevel = uploadPictureForm.querySelector('.effect-level');
+  var effectInput = effectLevel.querySelector('.effect-level__value');
+
+  var successTemplate = document.querySelector('#success')
+    .content
+    .querySelector('.success');
 
   var onEscCloseForm = function (evt) {
     if (evt.keyCode === window.utils.ESC_KEYCODE) {
-      uploadFileForm.classList.add('hidden');
+      uploadPictureForm.classList.add('hidden');
     }
     uploadFile.value = '';
     document.removeEventListener('keydown', onEscCloseForm);
   };
 
   var openEditForm = function () {
-    uploadFileForm.classList.remove('hidden');
+    uploadPictureForm.classList.remove('hidden');
+    effectInput.value = '0';
     document.addEventListener('keydown', onEscCloseForm);
     effectLevel.classList.add('hidden');
   };
 
   var closeEditForm = function () {
-    uploadFileForm.classList.add('hidden');
+    uploadPictureForm.classList.add('hidden');
     document.removeEventListener('keydown', onEscCloseForm);
     uploadFile.value = '';
   };
@@ -72,7 +78,50 @@
       if (hashtags[i].length > MAX_HASHTAG_LENGTH) {
         hashtagInput.setCustomValidity('Максимальная длина хэш-тега: ' + MAX_HASHTAG_LENGTH + ' символов');
       }
+
+      if (!/^[a-z0-9]+$/.test(hashtags[i].slice(1).toLowerCase())) {
+        hashtagInput.setCustomValidity('Хэш-теги могут состоять только из букв и цифр');
+      }
     }
+  };
+
+  var closeSuccessContainer = function () {
+    var successContainer = window.render.mainContainer.querySelector('.success');
+    var successButton = successContainer.querySelector('.success__button');
+    window.render.mainContainer.removeChild(SuccessContainer);
+
+    document.removeEventListener('keydown', onEscCloseSuccessContainer);
+    successButton.removeEventListener('click', closeSuccessContainer);
+    document.removeEventListener('click', onClickCloseSuccessContainer);
+
+    uploadPictureForm.reset();
+  };
+
+  var onEscCloseSuccessContainer = function (evt) {
+    if (evt.keyCode === window.util.ESC_KEYCODE) {
+      closeSuccessContainer();
+    }
+  };
+
+  var onClickCloseSuccessContainer = function (evt) {
+    var innerSuccessContainer = window.render.mainContainer.querySelector('.success__inner');
+    if (evt.target !== innerSuccessContainer && !(innerSuccessContainer.contains(evt.target))) {
+      closeSuccessContainer();
+    }
+  };
+
+  var onSuccess = function () {
+    closeEditForm();
+
+    var SuccessContainer = successTemplate.cloneNode(true);
+    var successButton = SuccessContainer.querySelector('.success__button');
+
+    window.render.mainContainer.appendChild(SuccessContainer);
+
+    successButton.addEventListener('click', closeSuccessContainer);
+
+    document.addEventListener('keydown', onEscCloseSuccessContainer);
+    document.addEventListener('click', onClickCloseSuccessContainer);
   };
 
   uploadFile.addEventListener('change', function () {
@@ -96,17 +145,23 @@
     document.addEventListener('keydown', onEscCloseForm);
   });
 
-  commentTextArea.addEventListener('focus', function () {
+  description.addEventListener('focus', function () {
     document.removeEventListener('keydown', onEscCloseForm);
   });
 
-  commentTextArea.addEventListener('blur', function () {
+  description.addEventListener('blur', function () {
     document.addEventListener('keydown', onEscCloseForm);
   });
 
+  uploadPictureForm.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    window.network.saveData(new FormData(uploadPictureForm), onSuccess, window.render.onError);
+  });
+
   window.form = {
-    uploadFileForm: uploadFileForm,
-    effectLevel: effectLevel
+    uploadPictureForm: uploadPictureForm,
+    effectLevel: effectLevel,
+    effectInput: effectInput
   };
 
 })();
