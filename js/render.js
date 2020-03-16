@@ -31,28 +31,47 @@
     pictureContainer.appendChild(fragment);
   };
 
-  var onClickCloseErrorBlock = function (evt) {
-    var innerErrorBlock = mainContainer.querySelector('.error__inner');
-    if (evt.target !== innerErrorBlock && !(innerErrorBlock.contains(evt.target))) {
-      closeErrorBlock();
+  var closeErrorContainer = function () {
+    var ErrorContainer = mainContainer.querySelector('.error');
+    var errorButtons = ErrorContainer.querySelectorAll('.error__button');
+    mainContainer.removeChild(ErrorContainer);
+
+    for (var i = 0; i < errorButtons.length; ++i) {
+      errorButtons[i].removeEventListener('click', closeErrorContainer);
+    }
+    document.removeEventListener('keydown', onEscCloseErrorContainer, true);
+    document.removeEventListener('click', onClickCloseErrorContainer);
+  };
+
+  var onEscCloseErrorContainer = function (evt) {
+    if (evt.keyCode === window.utils.ESC_KEYCODE) {
+      evt.stopPropagation();
+      closeErrorContainer();
+    }
+  };
+
+  var onClickCloseErrorContainer = function (evt) {
+    var innerErrorContainer = mainContainer.querySelector('.error__inner');
+    if (evt.target !== innerErrorContainer && !(innerErrorContainer.contains(evt.target))) {
+      closeErrorContainer();
     }
   };
 
   var onError = function (errorText) {
-    var errorBlock = errorTemplate.cloneNode(true);
-    var errorButtons = errorBlock.querySelectorAll('.error__button');
+    var ErrorContainer = errorTemplate.cloneNode(true);
+    var errorButtons = ErrorContainer.querySelectorAll('.error__button');
 
-    errorBlock.querySelector('.error__title').textContent = errorText;
-    errorBlock.style = 'z-index: 100;';
+    ErrorContainer.querySelector('.error__title').textContent = errorText;
+    ErrorContainer.style = 'z-index: 100;';
 
-    mainContainer.appendChild(errorBlock);
+    mainContainer.appendChild(ErrorContainer);
 
-    for (var i = 0; i < errorButtons.length; i++) {
-      errorButtons[i].addEventListener('click', closeErrorBlock);
+    for (var i = 0; i < errorButtons.length; ++i) {
+      errorButtons[i].addEventListener('click', closeErrorContainer);
     }
 
-    document.addEventListener('keydown', onEscCloseErrorBlock, true);
-    document.addEventListener('click', onClickCloseErrorBlock);
+    document.addEventListener('keydown', onEscCloseErrorContainer, true);
+    document.addEventListener('click', onClickCloseErrorContainer);
   };
 
 

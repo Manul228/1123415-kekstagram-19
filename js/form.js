@@ -28,7 +28,6 @@
 
   var openEditForm = function () {
     uploadPictureForm.classList.remove('hidden');
-    effectInput.value = '0';
     document.addEventListener('keydown', onEscCloseForm);
     effectLevel.classList.add('hidden');
   };
@@ -88,7 +87,7 @@
   var closeSuccessContainer = function () {
     var successContainer = window.render.mainContainer.querySelector('.success');
     var successButton = successContainer.querySelector('.success__button');
-    window.render.mainContainer.removeChild(SuccessContainer);
+    window.render.mainContainer.removeChild(successContainer);
 
     document.removeEventListener('keydown', onEscCloseSuccessContainer);
     successButton.removeEventListener('click', closeSuccessContainer);
@@ -98,7 +97,7 @@
   };
 
   var onEscCloseSuccessContainer = function (evt) {
-    if (evt.keyCode === window.util.ESC_KEYCODE) {
+    if (evt.keyCode === window.utils.ESC_KEYCODE) {
       closeSuccessContainer();
     }
   };
