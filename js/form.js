@@ -113,10 +113,10 @@
   var onSuccess = function () {
     closeEditForm();
 
-    var SuccessContainer = successTemplate.cloneNode(true);
-    var successButton = SuccessContainer.querySelector('.success__button');
+    var successContainer = successTemplate.cloneNode(true);
+    var successButton = successContainer.querySelector('.success__button');
 
-    window.render.mainContainer.appendChild(SuccessContainer);
+    window.render.mainContainer.appendChild(successContainer);
 
     successButton.addEventListener('click', closeSuccessContainer);
 
