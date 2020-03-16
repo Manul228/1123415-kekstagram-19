@@ -2,7 +2,7 @@
 
 (function () {
 
-  var URLS = {
+  var URLs = {
     URL_LOAD: 'https://js.dump.academy/kekstagram/data',
     URL_SAVE: 'https://js.dump.academy/kekstagram'
   };
@@ -39,7 +39,7 @@
   var loadData = function (onLoad, onError) {
     var xhr = generateRequest(onLoad, onError);
 
-    xhr.open('GET', URLS.URL_LOAD);
+    xhr.open('GET', URLs.URL_LOAD);
     xhr.send();
 
   };
@@ -47,7 +47,7 @@
   var saveData = function (data, onLoad, onError) {
     var xhr = generateRequest(onLoad, onError);
 
-    xhr.open('POST', URLS.URL_SAVE);
+    xhr.open('POST', URLs.URL_SAVE);
     xhr.send(data);
   };
 
