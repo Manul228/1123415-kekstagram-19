@@ -63,11 +63,11 @@
       }
 
       if (hashtags.length > MAX_HASHTAGS) {
-        hashtagInput.setCustomValidity('Максимальное число тегов: ' + MAX_HASHTAGS);
+        hashtagInput.setCustomValidity('Нельзя указать больше ' + MAX_HASHTAGS + ' хэш-тегов');
       }
 
       if (hashtags[i].length > MAX_HASHTAG_LENGTH) {
-        hashtagInput.setCustomValidity('Максимальная длина хэш-тэга: ' + MAX_HASHTAG_LENGTH + ' символов');
+        hashtagInput.setCustomValidity('Максимальная длина хэш-тега: ' + MAX_HASHTAG_LENGTH + ' символов');
       }
     }
   };

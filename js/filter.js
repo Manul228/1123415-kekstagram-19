@@ -21,15 +21,15 @@
   var effectlevelBar = effectLevel.querySelector('.effect-level__line');
   var effectLevelButton = effectLevel.querySelector('.effect-level__pin');
 
-  var setImageScale = function (positiveFlag) {
+  var setImageScale = function (isPositive) {
     var currentScale = Number.parseInt(scaleField.value, 10);
 
-    if (positiveFlag && (currentScale + SCALE_STEP) <= MAX_SCALE) {
+    if (isPositive && (currentScale + SCALE_STEP) <= MAX_SCALE) {
       scaleField.value = (currentScale + SCALE_STEP) + '%';
       imagePreview.style.transform = 'scale(' + (currentScale + SCALE_STEP) / 100 + ')';
     }
 
-    if (!positiveFlag && (currentScale - SCALE_STEP) >= MIN_SCALE) {
+    if (!isPositive && (currentScale - SCALE_STEP) >= MIN_SCALE) {
       scaleField.value = (currentScale - SCALE_STEP) + '%';
       imagePreview.style.transform = 'scale(' + (currentScale - SCALE_STEP) / 100 + ')';
     }
@@ -39,7 +39,7 @@
     imagePreview.style.filter = '';
     var currentEffect;
 
-    for (i = 0; i < effectButtons.length; i++) {
+    for (i = 0; i < effectButtons.length; ++i) {
       if (effectButtons[i].checked) {
         imagePreview.classList.remove('effects__preview--' + currentEffect);
         currentEffect = effectButtons[i].value;
@@ -92,20 +92,19 @@
   };
 
   reduceButton.addEventListener('click', function () {
-    var positiveFlag = false;
-    setImageScale(positiveFlag);
+    setImageScale(false);
   });
 
   enlargeButton.addEventListener('click', function () {
-    var positiveFlag = true;
-    setImageScale(positiveFlag);
+    setImageScale(true);
   });
 
-  for (var i = 0; i < effectButtons.length; i++) {
+  for (var i = 0; i < effectButtons.length; ++i) {
     effectButtons[i].addEventListener('change', onChangeSelectFilter);
   }
 
   effectLevelButton.addEventListener('mouseup', function () {
     setEffectLevel();
   });
+
 })();
