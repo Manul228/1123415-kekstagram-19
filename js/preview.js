@@ -59,7 +59,7 @@
   var onSmallPictureClick = function (i) {
     return function (evt) {
       evt.preventDefault();
-      showBigPicture(window.data.pictures[i]);
+      showBigPicture(window.render.pictures[i]);
 
       bigCloseButton.addEventListener('click', closeBigPicture);
       document.addEventListener('keydown', onEscCloseBigPicture);
@@ -75,6 +75,6 @@
     }
   };
 
-  initPreview();
+  setTimeout(initPreview, 1000);
 
 })();

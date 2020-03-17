@@ -16,7 +16,7 @@
   var scaleField = window.form.uploadFileForm.querySelector('.scale__control--value');
 
   var effectButtons = window.form.uploadFileForm.querySelectorAll('.effects__radio');
-  var effectLevel = window.form.uploadFileForm.querySelector('.effect-level');
+  var effectLevel = window.form.effectLevel;
   var effectInput = effectLevel.querySelector('.effect-level__value');
   var effectLevelBar = effectLevel.querySelector('.effect-level__line');
   var effectLevelButton = effectLevel.querySelector('.effect-level__pin');
@@ -42,6 +42,10 @@
   var onChangeSelectFilter = function () {
     imagePreview.style.filter = '';
     var currentEffect;
+
+    for (i = 0; i < effectButtons.length; ++i) {
+      imagePreview.classList.remove('effects__preview--' + effectButtons[i].value);
+    }
 
     for (i = 0; i < effectButtons.length; ++i) {
       if (effectButtons[i].checked) {

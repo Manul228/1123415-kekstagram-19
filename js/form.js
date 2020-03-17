@@ -11,6 +11,8 @@
   var hashtagInput = uploadFileForm.querySelector('.text__hashtags');
   var commentTextArea = uploadFileForm.querySelector('.text__description');
 
+  var effectLevel = uploadFileForm.querySelector('.effect-level');
+
   var onEscCloseForm = function (evt) {
     if (evt.keyCode === window.utils.ESC_KEYCODE) {
       uploadFileForm.classList.add('hidden');
@@ -22,6 +24,7 @@
   var openEditForm = function () {
     uploadFileForm.classList.remove('hidden');
     document.addEventListener('keydown', onEscCloseForm);
+    effectLevel.classList.add('hidden');
   };
 
   var closeEditForm = function () {
@@ -102,7 +105,8 @@
   });
 
   window.form = {
-    uploadFileForm: uploadFileForm
+    uploadFileForm: uploadFileForm,
+    effectLevel: effectLevel
   };
 
 })();
