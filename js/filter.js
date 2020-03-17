@@ -18,8 +18,12 @@
   var effectButtons = window.form.uploadFileForm.querySelectorAll('.effects__radio');
   var effectLevel = window.form.uploadFileForm.querySelector('.effect-level');
   var effectInput = effectLevel.querySelector('.effect-level__value');
-  var effectlevelBar = effectLevel.querySelector('.effect-level__line');
+  var effectLevelBar = effectLevel.querySelector('.effect-level__line');
   var effectLevelButton = effectLevel.querySelector('.effect-level__pin');
+  var effectLevelFillBar = effectLevel.querySelector('.effect-level__depth');
+
+  var bar;
+  var barLength;
 
   var setImageScale = function (isPositive) {
     var currentScale = Number.parseInt(scaleField.value, 10);
@@ -46,6 +50,10 @@
         if (currentEffect !== 'none') {
           effectLevel.classList.remove('hidden');
           imagePreview.classList.add('effects__preview--' + currentEffect);
+          bar = effectLevelBar.getBoundingClientRect();
+          barLength = bar.right - bar.left;
+          effectLevelButton.style.left = barLength + 'px';
+          effectLevelFillBar.style.width = '100%';
         } else {
           effectLevel.classList.add('hidden');
         }
@@ -54,9 +62,7 @@
   };
 
   var countEffectLevel = function () {
-    var bar = effectlevelBar.getBoundingClientRect();
     var pin = effectLevelButton.getBoundingClientRect();
-    var barLength = bar.right - bar.left;
     var pinOffset = pin.left - bar.left;
 
     return Math.round((pinOffset / barLength + 0.02) * 100);
@@ -91,6 +97,35 @@
     }
   };
 
+  var onEffectPinMousemove = function (evt) {
+    bar = effectLevelBar.getBoundingClientRect();
+    barLength = bar.right - bar.left;
+
+    var shift = evt.clientX - bar.left;
+
+    if (shift > 0 && shift <= barLength) {
+      effectLevelButton.style.left = shift + 'px';
+    }
+
+    effectLevelFillBar.style.width = countEffectLevel() + '%';
+
+    setEffectLevel();
+  };
+
+  var onEffectPinMouseup = function (evt) {
+    evt.preventDefault();
+
+    document.removeEventListener('mousemove', onEffectPinMousemove);
+    document.removeEventListener('mouseup', onEffectPinMouseup);
+  };
+
+  var onEffectPinMousedown = function (evt) {
+    evt.preventDefault();
+
+    document.addEventListener('mousemove', onEffectPinMousemove);
+    document.addEventListener('mouseup', onEffectPinMouseup);
+  };
+
   reduceButton.addEventListener('click', function () {
     setImageScale(false);
   });
@@ -103,8 +138,6 @@
     effectButtons[i].addEventListener('change', onChangeSelectFilter);
   }
 
-  effectLevelButton.addEventListener('mouseup', function () {
-    setEffectLevel();
-  });
+  effectLevelButton.addEventListener('mousedown', onEffectPinMousedown);
 
 })();
