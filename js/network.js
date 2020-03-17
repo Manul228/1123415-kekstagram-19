@@ -1,7 +1,12 @@
 'use strict';
 
 (function () {
-  var URL = 'https://js.dump.academy/kekstagram/data';
+
+  var URLs = {
+    URL_LOAD: 'https://js.dump.academy/kekstagram/data',
+    URL_SAVE: 'https://js.dump.academy/kekstagram'
+  };
+
   var StatusCode = {
     OK: 200
   };
@@ -34,13 +39,21 @@
   var loadData = function (onLoad, onError) {
     var xhr = generateRequest(onLoad, onError);
 
-    xhr.open('GET', URL);
+    xhr.open('GET', URLs.URL_LOAD);
     xhr.send();
 
   };
 
+  var saveData = function (data, onLoad, onError) {
+    var xhr = generateRequest(onLoad, onError);
+
+    xhr.open('POST', URLs.URL_SAVE);
+    xhr.send(data);
+  };
+
   window.network = {
-    loadData: loadData
+    loadData: loadData,
+    saveData: saveData
   };
 
 })();

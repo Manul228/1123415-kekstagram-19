@@ -9,13 +9,13 @@
   var BRIGHTNESS_RANGE = 2;
   var MIN_BRIGHTNESS_VALUE = 1;
 
-  var imagePreview = window.form.uploadFileForm.querySelector('.img-upload__preview img');
+  var imagePreview = window.form.uploadOverlay.querySelector('.img-upload__preview img');
 
-  var reduceButton = window.form.uploadFileForm.querySelector('.scale__control--smaller');
-  var enlargeButton = window.form.uploadFileForm.querySelector('.scale__control--bigger');
-  var scaleField = window.form.uploadFileForm.querySelector('.scale__control--value');
+  var reduceButton = window.form.uploadOverlay.querySelector('.scale__control--smaller');
+  var enlargeButton = window.form.uploadOverlay.querySelector('.scale__control--bigger');
+  var scaleField = window.form.uploadOverlay.querySelector('.scale__control--value');
 
-  var effectButtons = window.form.uploadFileForm.querySelectorAll('.effects__radio');
+  var effectButtons = window.form.uploadOverlay.querySelectorAll('.effects__radio');
   var effectLevel = window.form.effectLevel;
   var effectInput = effectLevel.querySelector('.effect-level__value');
   var effectLevelBar = effectLevel.querySelector('.effect-level__line');
