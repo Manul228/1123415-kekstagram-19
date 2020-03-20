@@ -18,19 +18,30 @@
 
   var renderPicture = function (pictures) {
     window.render.pictures = pictures;
+
+    var childern = Array.from(pictureContainer.childern);
+
+    childern.forEach(function (child) {
+      if (child.classList.contains('picture')) {
+        pictureContainer.removeChild(child);
+      }
+    });
+
     var fragment = document.createDocumentFragment();
 
-    for (var i = 0; i < pictures.length; ++i) {
-      var picture = pictureTemplate.cloneNode(true);
+    pictures.forEach (function (picture) {
+      var pictureNode = pictureTemplate.cloneNode(true);
 
-      picture.querySelector('.picture__img').src = pictures[i].url;
-      picture.querySelector('.picture__likes').textContent = pictures[i].likes;
-      picture.querySelector('.picture__comments').textContent = pictures[i].comments.length;
+      pictureNode.querySelector('.picture__img').src = picture.url;
+      pictureNode.querySelector('.picture__likes').textContent = picture.likes;
+      pictureNode.querySelector('.picture__comments').textContent = picture.comments.length;
 
-      fragment.appendChild(picture);
-    }
+      fragment.appendChild(pictureNode);
+    });
 
     pictureContainer.appendChild(fragment);
+
+    pictureFilter.classList.remove('img-filters--inactive');
   };
 
   var closeErrorContainer = function () {
@@ -38,9 +49,10 @@
     var errorButtons = ErrorContainer.querySelectorAll('.error__button');
     mainContainer.removeChild(ErrorContainer);
 
-    for (var i = 0; i < errorButtons.length; ++i) {
-      errorButtons[i].removeEventListener('click', closeErrorContainer);
-    }
+    errorButtons.forEach (function (errorButton) {
+      errorButton.removeEventListener('click', closeErrorContainer);
+    });
+
     document.removeEventListener('keydown', onEscCloseErrorContainer, true);
     document.removeEventListener('click', onClickCloseErrorContainer);
   };
@@ -54,7 +66,7 @@
 
   var onClickCloseErrorContainer = function (evt) {
     var innerErrorContainer = mainContainer.querySelector('.error__inner');
-    if (evt.target !== innerErrorContainer && !(innerErrorContainer.contains(evt.target))) {
+    if (!(evt.target === innerErrorContainer || innerErrorContainer.contains(evt.target))) {
       closeErrorContainer();
     }
   };
@@ -83,7 +95,8 @@
     pictureContainer: pictureContainer,
     mainContainer: mainContainer,
     onError: onError,
-    pictureFilter: pictureFilter
+    pictureFilter: pictureFilter,
+    renderPicture: renderPicture
   };
 
 })();
