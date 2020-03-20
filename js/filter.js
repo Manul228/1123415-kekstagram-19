@@ -13,4 +13,45 @@
     });
   };
 
+  var renderRandomPictures = function () {
+    var randomPictures = [];
+    var pictures = window.utils.shuffleArray(window.render.pictures.slice());
+
+    for (var i = 0; i < RANDOM_PICTURES_AMOUNT; ++i) {
+      randomPictures.push(pictures[i]);
+    }
+
+    window.render.renderPicture(randomPictures);
+  };
+
+  var getCommentsDiff = function (left, right) {
+    return right.comments.length - left.comments.length;
+  };
+
+  var renderPicturesByComments = function () {
+    var pics = window.render.pictures.slice().sort(getCommentsDiff);
+    window.render.renderPicture(pics);
+  };
+
+  var onFilterButtonClick = window.utils.debounce (function (evt) {
+    switch (evt.target.id) {
+      case 'filter-popular':
+        window.render.renderPicture(window.render.photos);
+        break;
+      case 'filter-random':
+        renderRandomPictures();
+        break;
+      case 'filter-discussed':
+        renderPicturesByComments();
+        break;
+    }
+  });
+
+  filterButtons.forEach (function (filterButton) {
+    filterButton.addEventListener('click', function (evt) {
+      setFilterButtonClicked (evt.target.id);
+      onFilterButtonClick(evt);
+    });
+  });
+
 })();
