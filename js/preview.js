@@ -80,6 +80,9 @@
     bigCloseButton.addEventListener('click', onBigCloseButtonClick);
     document.addEventListener('keydown', onBigPictureKeydown);
 
+    bigPictureElement.setAttribute('tabindex', '0');
+    bigPictureElement.focus();
+
     document.body.classList.add('modal-open');
   };
 
