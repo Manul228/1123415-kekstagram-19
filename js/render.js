@@ -19,8 +19,8 @@
   var renderPictures = function (pictures) {
     window.render.defaultPictures =
     (typeof window.render.defaultPictures === 'undefined')
-    ? pictures
-    : window.render.defaultPictures;
+      ? pictures
+      : window.render.defaultPictures;
 
     var children = Array.from(pictureContainer.children);
 
@@ -32,7 +32,7 @@
 
     var fragment = document.createDocumentFragment();
 
-    pictures.forEach (function (picture) {
+    pictures.forEach(function (picture) {
       var pictureNode = pictureTemplate.cloneNode(true);
 
       pictureNode.querySelector('.picture__img').src = picture.url;
@@ -56,7 +56,7 @@
     var errorButtons = errorContainer.querySelectorAll('.error__button');
     mainContainer.removeChild(errorContainer);
 
-    errorButtons.forEach (function (errorButton) {
+    errorButtons.forEach(function (errorButton) {
       errorButton.removeEventListener('click', closeErrorContainer);
     });
 

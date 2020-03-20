@@ -7,9 +7,13 @@
 
   var setFilterButtonClicked = function (clickedButtonId) {
     filterButtons.forEach(function (filterButton) {
-      filterButton.id === clickedButtonId
-      ? filterButton.classList.add('img-filters__button--active')
-      : filterButton.classList.remove('img-filters__button--active');
+      var isThisButton = filterButton.id === clickedButtonId;
+
+      if (isThisButton) {
+        filterButton.classList.add('img-filters__button--active');
+      } else {
+        filterButton.classList.remove('img-filters__button--active');
+      }
     });
   };
 
@@ -33,7 +37,7 @@
     window.render.renderPictures(pics);
   };
 
-  var onFilterButtonClick = window.utils.debounce (function (evt) {
+  var onFilterButtonClick = window.utils.debounce(function (evt) {
     switch (evt.target.id) {
       case 'filter-default':
         window.render.renderPictures(window.render.defaultPictures);
@@ -47,9 +51,9 @@
     }
   });
 
-  filterButtons.forEach (function (filterButton) {
+  filterButtons.forEach(function (filterButton) {
     filterButton.addEventListener('click', function (evt) {
-      setFilterButtonClicked (evt.target.id);
+      setFilterButtonClicked(evt.target.id);
       onFilterButtonClick(evt);
     });
   });

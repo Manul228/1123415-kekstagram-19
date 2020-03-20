@@ -49,12 +49,12 @@
     };
 
     return {
-      show: renderComments
+      renderComments: renderComments
     };
   };
 
   var onCommentButtonClick = function () {
-    currentComments.show();
+    currentComments.renderComments();
   };
 
   var showBigPicture = function (picture) {
@@ -73,7 +73,7 @@
     bigPictureElement.querySelector('.comments-count').textContent = picture.comments.length;
     bigPictureElement.querySelector('.social__caption').textContent = picture.description;
 
-    currentComments.show();
+    currentComments.renderComments();
 
     commentLoadButton.addEventListener('click', onCommentButtonClick);
 
@@ -103,7 +103,7 @@
   };
 
   var onBigPictureKeydown = function (evt) {
-    if (window.util.isEscPressed(evt)) {
+    if (evt.keyCode === window.utils.ESC_KEYCODE) {
       closeBigPicture();
     }
   };
