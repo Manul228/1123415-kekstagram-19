@@ -16,12 +16,11 @@
   .content
   .querySelector('.error');
 
-  var renderPicture = function (pictures) {
-    if (!window.render.defaultPictures) {
-      window.render.defaultPictures = pictures;
-    }
-
-    window.render.pictures = pictures;
+  var renderPictures = function (pictures) {
+    window.render.defaultPictures =
+    (typeof window.render.defaultPictures === 'undefined')
+    ? pictures
+    : window.render.defaultPictures;
 
     var children = Array.from(pictureContainer.children);
 
@@ -97,14 +96,14 @@
   };
 
 
-  window.network.loadData(renderPicture, onError);
+  window.network.loadData(renderPictures, onError);
 
   window.render = {
     pictureContainer: pictureContainer,
     mainContainer: mainContainer,
     onError: onError,
     pictureFilter: pictureFilter,
-    renderPicture: renderPicture
+    renderPictures: renderPictures
   };
 
 })();

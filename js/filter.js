@@ -15,36 +15,34 @@
 
   var renderRandomPictures = function () {
     var randomPictures = [];
-    console.log(window.render.defaultPictures);
-    var pictures = window.utils.shuffleArray(window.render.defaultPictures);
+    var pictures = window.utils.shuffleArray(window.render.defaultPictures.slice());
 
     for (var i = 0; i < RANDOM_PICTURES_AMOUNT; ++i) {
       randomPictures.push(pictures[i]);
     }
 
-    window.render.renderPicture(randomPictures);
+    window.render.renderPictures(randomPictures);
   };
 
   var getCommentsDiff = function (left, right) {
     return right.comments.length - left.comments.length;
   };
 
-  var renderPicturesByComments = function () {
-    var pics = window.render.defaultPictures.sort(getCommentsDiff);
-    window.render.renderPicture(pics);
+  var rankPicturesByComments = function () {
+    var pics = window.render.defaultPictures.slice().sort(getCommentsDiff);
+    window.render.renderPictures(pics);
   };
 
   var onFilterButtonClick = window.utils.debounce (function (evt) {
     switch (evt.target.id) {
-      case 'filter-popular':
-        console.log(window.render.photos);
-        window.render.renderPicture(window.render.defaultPictures);
+      case 'filter-default':
+        window.render.renderPictures(window.render.defaultPictures);
         break;
       case 'filter-random':
         renderRandomPictures();
         break;
       case 'filter-discussed':
-        renderPicturesByComments();
+        rankPicturesByComments();
         break;
     }
   });
