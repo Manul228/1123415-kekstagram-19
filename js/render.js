@@ -2,17 +2,19 @@
 
 (function () {
 
+  var mainContainer = document.querySelector('main');
+
   var pictureContainer = document.querySelector('.pictures');
 
   var pictureTemplate = document.querySelector('#picture')
     .content
     .querySelector('.picture');
 
+  var pictureFilter = mainContainer.querySelector('.img-filters');
+
   var errorTemplate = document.querySelector('#error')
   .content
   .querySelector('.error');
-
-  var mainContainer = document.querySelector('main');
 
   var renderPicture = function (pictures) {
     window.render.pictures = pictures;
@@ -80,7 +82,8 @@
   window.render = {
     pictureContainer: pictureContainer,
     mainContainer: mainContainer,
-    onError: onError
+    onError: onError,
+    pictureFilter: pictureFilter
   };
 
 })();
