@@ -21,15 +21,15 @@
     return array[getRandomInt(0, len)];
   };
 
-  var shuffleArray = function (array) {
-    array.forEach(function (item, index, newArray) {
-      var randomIndex = getRandomElement(index, newArray.length);
-      var temp = item;
-      newArray[index] = newArray[randomIndex];
-      newArray[randomIndex] = temp;
-    });
-
-    return array;
+  var shuffleArray = function (arr) {
+    var j, temp;
+    for(var i = arr.length - 1; i > 0; i--){
+      j = Math.floor(Math.random()*(i + 1));
+      temp = arr[j];
+      arr[j] = arr[i];
+      arr[i] = temp;
+    }
+    return arr;
   };
 
   var debounce = function (callback) {

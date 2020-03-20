@@ -19,15 +19,17 @@
   var renderPicture = function (pictures) {
     window.render.pictures = pictures;
 
-    var childern = Array.from(pictureContainer.childern);
+    var children = Array.from(pictureContainer.children);
 
-    childern.forEach(function (child) {
+    children.forEach(function (child) {
       if (child.classList.contains('picture')) {
         pictureContainer.removeChild(child);
       }
     });
 
     var fragment = document.createDocumentFragment();
+
+    console.log(pictures);
 
     pictures.forEach (function (picture) {
       var pictureNode = pictureTemplate.cloneNode(true);

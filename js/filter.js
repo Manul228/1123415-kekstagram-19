@@ -15,7 +15,8 @@
 
   var renderRandomPictures = function () {
     var randomPictures = [];
-    var pictures = window.utils.shuffleArray(window.render.pictures.slice());
+    console.log(window.render.pictures);
+    var pictures = window.utils.shuffleArray(window.render.pictures);
 
     for (var i = 0; i < RANDOM_PICTURES_AMOUNT; ++i) {
       randomPictures.push(pictures[i]);
