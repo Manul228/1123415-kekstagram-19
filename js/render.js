@@ -17,6 +17,10 @@
   .querySelector('.error');
 
   var renderPicture = function (pictures) {
+    if (!window.render.defaultPictures) {
+      window.render.defaultPictures = pictures;
+    }
+
     window.render.pictures = pictures;
 
     var children = Array.from(pictureContainer.children);

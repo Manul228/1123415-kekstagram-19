@@ -10,6 +10,8 @@
   var commentLoadButton = bigPictureElement.querySelector('.comments-loader');
   var commentCounter = bigPictureElement.querySelector('.social__comment-count');
 
+  var currentComments;
+
   var showComments = function (comments) {
     var privateCounter = 0;
 
@@ -51,10 +53,14 @@
     };
   };
 
+  var onCommentButtonClick = function () {
+    currentComments.show();
+  };
+
   var showBigPicture = function (picture) {
     bigPictureElement.classList.remove('hidden');
 
-    var currentComments = showComments(picture.comments);
+    currentComments = showComments(picture.comments);
 
     var children = Array.from(commentsList.children);
 

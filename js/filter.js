@@ -15,8 +15,8 @@
 
   var renderRandomPictures = function () {
     var randomPictures = [];
-    console.log(window.render.pictures);
-    var pictures = window.utils.shuffleArray(window.render.pictures);
+    console.log(window.render.defaultPictures);
+    var pictures = window.utils.shuffleArray(window.render.defaultPictures);
 
     for (var i = 0; i < RANDOM_PICTURES_AMOUNT; ++i) {
       randomPictures.push(pictures[i]);
@@ -30,7 +30,7 @@
   };
 
   var renderPicturesByComments = function () {
-    var pics = window.render.pictures.slice().sort(getCommentsDiff);
+    var pics = window.render.defaultPictures.sort(getCommentsDiff);
     window.render.renderPicture(pics);
   };
 
@@ -38,7 +38,7 @@
     switch (evt.target.id) {
       case 'filter-popular':
         console.log(window.render.photos);
-        window.render.renderPicture(window.render.photos);
+        window.render.renderPicture(window.render.defaultPictures);
         break;
       case 'filter-random':
         renderRandomPictures();
