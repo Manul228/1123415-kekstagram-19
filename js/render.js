@@ -29,8 +29,6 @@
 
     var fragment = document.createDocumentFragment();
 
-    console.log(pictures);
-
     pictures.forEach (function (picture) {
       var pictureNode = pictureTemplate.cloneNode(true);
 
@@ -39,6 +37,10 @@
       pictureNode.querySelector('.picture__comments').textContent = picture.comments.length;
 
       fragment.appendChild(pictureNode);
+
+      pictureNode.addEventListener('click', function () {
+        window.preview.showBigPicture(picture);
+      });
     });
 
     pictureContainer.appendChild(fragment);
@@ -47,9 +49,9 @@
   };
 
   var closeErrorContainer = function () {
-    var ErrorContainer = mainContainer.querySelector('.error');
-    var errorButtons = ErrorContainer.querySelectorAll('.error__button');
-    mainContainer.removeChild(ErrorContainer);
+    var errorContainer = mainContainer.querySelector('.error');
+    var errorButtons = errorContainer.querySelectorAll('.error__button');
+    mainContainer.removeChild(errorContainer);
 
     errorButtons.forEach (function (errorButton) {
       errorButton.removeEventListener('click', closeErrorContainer);

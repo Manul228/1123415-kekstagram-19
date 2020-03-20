@@ -37,6 +37,7 @@
   var onFilterButtonClick = window.utils.debounce (function (evt) {
     switch (evt.target.id) {
       case 'filter-popular':
+        console.log(window.render.photos);
         window.render.renderPicture(window.render.photos);
         break;
       case 'filter-random':
