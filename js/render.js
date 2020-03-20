@@ -87,9 +87,9 @@
 
     mainContainer.appendChild(ErrorContainer);
 
-    for (var i = 0; i < errorButtons.length; ++i) {
-      errorButtons[i].addEventListener('click', closeErrorContainer);
-    }
+    errorButtons.forEach(function (errorButton) {
+      errorButton.addEventListener('click', closeErrorContainer);
+    });
 
     document.addEventListener('keydown', onEscCloseErrorContainer, true);
     document.addEventListener('click', onClickCloseErrorContainer);
