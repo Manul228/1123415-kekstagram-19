@@ -11,6 +11,9 @@
   var uploadOverlay = window.render.pictureContainer.querySelector('.img-upload__overlay');
   var uploadForm = document.querySelector('.img-upload__form');
 
+  var imagePreview = uploadOverlay.querySelector('.img-upload__preview img');
+  var scaleField = uploadOverlay.querySelector('.scale__control--value');
+
   var editCloseButton = uploadOverlay.querySelector('#upload-cancel');
   var hashtagInput = uploadOverlay.querySelector('.text__hashtags');
   var description = uploadOverlay.querySelector('.text__description');
@@ -31,6 +34,8 @@
   };
 
   var openEditForm = function () {
+    imagePreview.style.transform = 'scale(1)';
+    scaleField.value = '100%';
     uploadOverlay.classList.remove('hidden');
     document.addEventListener('keydown', onEscCloseForm);
     effectLevel.classList.add('hidden');
@@ -83,7 +88,7 @@
       }
 
       if (!/^[a-z0-9]+$/.test(hashtags[i].slice(1).toLowerCase())) {
-        hashtagInput.setCustomValidity('Хэш-теги могут состоять только из букв и цифр');
+        hashtagInput.setCustomValidity('Cтрока после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т.п.), символы пунктуации (тире, дефис, запятая и т.п.), эмодзи и т.д.');
       }
     }
   };
@@ -166,6 +171,8 @@
 
   window.form = {
     uploadOverlay: uploadOverlay,
+    imagePreview: imagePreview,
+    scaleField: scaleField,
     effectLevel: effectLevel,
     effectInput: effectInput
   };
