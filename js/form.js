@@ -109,7 +109,7 @@
 
   var onClickCloseSuccessContainer = function (evt) {
     var innerSuccessContainer = window.render.mainContainer.querySelector('.success__inner');
-    if (evt.target !== innerSuccessContainer && !(innerSuccessContainer.contains(evt.target))) {
+    if (!(evt.target === innerSuccessContainer || innerSuccessContainer.contains(evt.target))) {
       closeSuccessContainer();
       uploadForm.reset();
     }
